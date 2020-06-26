@@ -4,35 +4,27 @@
 
 using namespace std;
 
+/*
+#include <mapbox/variant.hpp>
+using namespace mapbox::util;
+typedef variant<int, double, string, bool> any;
+*/
+
 int main()
 {
-    node r = node("Test");
-    r= "Test2";
-    //static node<string> a("Mahdy");
-    r["Name"]= "Mahdy";
-    //r["Name"]= "Ali";
-    //r["Age"] = node<int>(34);
-    //r["Sex"] = node<string>("Male");
-    //r["children"]["1"] = new node<string>("Ali");
-    //r["Name"]->add("Family", new node<string>("Asady"));
-    r["Name"]["Family"] = "Asady";
+    node r = node();
+    r["Name"]= string("Mahdy");
+    r["Family"] = string("Asady");
+    r["Age"] = 34;
+    r["Weight"] = 95.5;
+    r["children"]["0"]["Name"] = string("Ali");
+    r["children"]["1"]["Name"] = string("Asal");
+    //r["Alive"] = true;
 
+    string tmplate = "Hi {{Name}}!\n Your children list is:\n{{#children}}{{Name}}{{/children}}\nwith enter:\n{{#children}}{{Name}}\n{{/children}}\nEnd";
+    templateEngine te = templateEngine(tmplate, r);
+    cout << te.render();
 
-    r.print();
-    r["Name"].print();
-    r["Name"]["Family"].print();
-
-    //(*r["Name"])["Family"].print();
-    //r["Name"]->operator[]("Family")->print();
-    //nodeTemplate *b = r["Name"];
-    //nodeTemplate *c = b["Family"];
-    //b["Family"]->print();
-    //r["Age"]->print();
-    //r["Sex"]->print();
-
-    //r["children"]->print();
-    //r["children"]["1"]->print();
-    //r["blabla"]->print();
     cout << "*********************" << endl;
     return 0;
 }
