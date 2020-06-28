@@ -17,13 +17,25 @@ int main()
     r["Family"] = string("Asady");
     r["Age"] = 34;
     r["Weight"] = 95.5;
-    r["children"]["0"]["Name"] = string("Ali");
-    r["children"]["1"]["Name"] = string("Asal");
+    r["children"][0]["Name"] = string("Ali");
+    r["children"][1]["Name"] = string("Asal");
     //r["Alive"] = true;
 
-    string tmplate = "Hi {{Name}}!\n Your children list is:\n{{#children}}{{Name}}{{/children}}\nwith enter:\n{{#children}}{{Name}}\n{{/children}}\nEnd";
+    string tmplate =
+"Hi {{Name}} {{Family}}!\n\
+Your children list is:\n\
+{{#children}}{{Name}}{{/children}}\n\
+with enter:\n\
+{{#children}}{{Name}}\n{{/children}}\n\
+{{=<< >>=}}\
+Your age is: <<Age>>\n\
+End";
+
+
+    //cout << tmplate << endl << endl;
+
     templateEngine te = templateEngine(tmplate, r);
-    cout << te.render();
+    cout << te.render() << endl;
 
     cout << "*********************" << endl;
     return 0;
